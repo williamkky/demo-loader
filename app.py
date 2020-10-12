@@ -8,10 +8,9 @@ app = Flask(__name__)
 def home():
     return render_template('bar_admin.html')
 
-@app.route('/demo_loader')
-def demo_loader():
-    time.sleep(3)
-    return 'Waited for 3 secs'
+@app.route('/get_data')
+def get_data():
+    return render_template('get_data.html')
 
 if __name__ == '__main__':
     app.run()
