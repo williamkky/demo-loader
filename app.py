@@ -10,6 +10,7 @@ def home():
 
 @app.route('/get_data')
 def get_data():
+    time.sleep(10)
     return render_template('get_data.html')
 
 if __name__ == '__main__':
