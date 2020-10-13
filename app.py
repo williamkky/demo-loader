@@ -13,10 +13,10 @@ def get_data():
     time.sleep(5)
     return render_template('get_data.html')
 
-@app.route('/new_loader')
+@app.route('/new_loader.html')
 def new_loader():
     time.sleep(5)
-    return render_template('new_loader')
+    return render_template('new_loader.html')
 
 if __name__ == '__main__':
     app.run()
