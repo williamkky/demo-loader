@@ -3,21 +3,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         #loading {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            top: 0;
+            overflow: hidden;
+            z-index: 10;
+            background: #666;
+            opacity: 0.5;
+            transition: opacity .5s linear;
+            display: none;
+        }
+
+        #circle {
             position: absolute;
             left: 50%;
             top: 50%;
             z-index: 1;
-            width: 150px;
-            height: 150px;
-            margin: -75px 0 0 -75px;
-            border: 16px solid #f3f3f3;
+            justify-content: center;
+            align-items: center;
+            border: 8px solid #f3f3f3;
             border-radius: 50%;
-            border-top: 16px solid #3498db;
-            width: 120px;
-            height: 120px;
+            border-top: 8px solid #3498db;
+            width: 20px;
+            height: 20px;
             -webkit-animation: spin 2s linear infinite;
             animation: spin 2s linear infinite;
-            display: none;
         }
 
         @-webkit-keyframes spin {
@@ -38,8 +50,8 @@
             }
         }
 
-        #click{
-          display: block;
+        #click {
+            display: block;
         }
     </style>
     <script>
@@ -56,7 +68,9 @@
     <div class="position-relative container-fluid">
         <a id="click" class="btn btn-outline-light" role="button" href="/get_data" onclick="loading();">click me</a>
     </div>
-    <div id="loading"></div>
+    <div id="loading">
+        <div id="circle"></div>
+    </div>
 </nav>
 <br>
 </body>
