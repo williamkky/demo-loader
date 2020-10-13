@@ -10,7 +10,7 @@
             background-repeat: no-repeat;
         }
 
-        @keyframes pulse {
+        /*@keyframes pulse {
             from {
                 opacity: 1;
                 transform: scale(1);
@@ -30,7 +30,7 @@
             overflow: hidden;
             z-index: 10;
             background: #666;
-            opacity:0.5 ;
+            opacity: 0.5;
             transition: opacity .5s linear;
         }
 
@@ -66,6 +66,46 @@
             100% {
                 transform: rotate(360deg);
             }
+        }*/
+
+        #loading2 {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            top: 0;
+            overflow: hidden;
+            z-index: 10;
+            background: #444;
+            opacity: 0.5;
+            transition: opacity .5s linear;
+            display: none;
+        }
+
+        #main_loader2 {
+            font-family: Impact, cursive;
+            font-size: 40px;
+            color: #ffffff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #main_loader2::after {
+            content: '\2026';
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: bottom;
+            animation: dots steps(7, end) 3s infinite;
+            width: 0px;
+        }
+
+        @keyframes dots {
+            to {
+                width: 1.25em;
+            }
         }
 
         #content {
@@ -74,21 +114,28 @@
         }
     </style>
     <script>
-        function hideLoading() {
+        /*function hideLoading() {
             document.getElementById('loading').style.opacity = '0';
             document.getElementById('loading').style.zIndex = '-1';
+        }*/
+
+        document.getElementById("click").addEventListener("click", loading2);
+
+        function loading2() {
+            document.getElementById("loading2").style.display = "block";
         }
     </script>
 </head>
 <body onload="hideLoading();">
-<div id="loading">
+<!--<div id="loading">
     <div id="circle"></div>
-</div>
+</div>-->
 <div id="content">
-    <h3 style="padding: 20px">I am loaded!</h3>
+    <h3><a id="click" class="btn btn-outline-light" role="button" href="/new_loader" onclick="loading2();">click me</a></h3>
     <img src="https://images4.alphacoders.com/109/thumb-1920-1094214.jpg">
 </div>
-
-
+<div id="loading2">
+    <div id="main_loader2">loading</div>
+</div>
 </body>
 </html>
