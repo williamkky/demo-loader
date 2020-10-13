@@ -1,3 +1,40 @@
+<html>
+<head>
+    <style>
+        #listphoto {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+    </style>
+    <script>
+
+        /* this is show photo function */
+
+        function showphoto(x) {
+            var i;
+            for (i = 1; ; i++) {
+                if (i <= x) {
+                    console.log(i);
+                    document.getElementById("photo" + i).style.display = "block";
+                } else if (i >= x + 1) {
+                    document.getElementById("photo" + i).style.display = "none";
+                }
+            }
+        }
+
+        function showallphoto() {
+            var i = 1;
+            while (i > 0) {
+                i += 1
+                document.getElementById("photo" + i).style.display = "block";
+            }
+        }
+
+        /*end*/
+
+    </script>
+</head>
 <body>
 {% block app_content %}
     <div class="page-header" xmlns="http://www.w3.org/1999/html">
@@ -5,22 +42,40 @@
         <br>
     </div>
 
+    <!--This is the latest button and onclick function-->
+
+    <div id="listphoto">
+        <button id="show10" onclick="showphoto(10);">10</button> <!-- show 10 photo -->
+        <button id="show20" onclick="showphoto(20);">20</button>
+        <button id="show50" onclick="showphoto(50);">50</button>
+
+        <!-- <button id="showN" onclick="showphoto(N);">N</button> -->
+        <!-- change N to how many photo you want to show -->
+
+        <button id="showall" onclick="showallphoto();">ALL</button>
+    </div>
+
     {% if photo != {} %}
         <div class="container-fluid" style="width: 100%">
             <div class="col-md-12" style="height:350px">
                 {% for photo in photos %}
-                    <div class="col-md-3">
-                        <img src="{{ photo_dict[photo]['gcs_public_url'] }}" style="display:block; margin-right: auto;margin-left: auto" height="300px" width="300px">
+
+                    <div id="photo{{ loop.index }}" class="col-md-3" style="display:block;">  <!-- added new id and style in this div -->
+
+                        <img src="{{ photo_dict[photo]['gcs_public_url'] }}"
+                             style="display:block; margin-right: auto;margin-left: auto" height="300px" width="300px">
                         <div style="margin-left: auto;margin-right: auto;width: 20em;text-align: center;height:50px">
-                            Photo Number : {{loop.index}}<br>
+                            Photo Number : {{ loop.index }}<br>
                             {% if 'row_label' in photo_dict[photo] %}
                                 {{ photo_dict[photo]['row_label'] }}<br>
                             {% endif %}
                             {% if photo_dict[photo]['edit_row_label'] == true %}
-                                <input type="checkbox" name="images_selected" value="{{ photo_dict[photo]['photo_filename'],photo_dict[photo]['post_id'] }}">
+                                <input type="checkbox" name="images_selected"
+                                       value="{{ photo_dict[photo]['photo_filename'],photo_dict[photo]['post_id'] }}">
                             {% endif %}
                             {{ photo_dict[photo]['time_utc'] }}
-                            <a href="{{ photo_dict[photo]['post_url'] }}" class="glyphicon glyphicon-new-window" target="_blank"></a>
+                            <a href="{{ photo_dict[photo]['post_url'] }}" class="glyphicon glyphicon-new-window"
+                               target="_blank"></a>
                         </div>
                         <hr>
                     </div>
@@ -30,3 +85,4 @@
     {% endif %}
 {% endblock %}
 </body>
+</html>
