@@ -6,6 +6,29 @@
             flex-direction: row;
             justify-content: space-around;
         }
+
+        /* go to top button css*/
+
+        #gototop {
+            display: block;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            font-size: 18px;
+            border: none;
+            outline: none;
+            background-color: #030052;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        #gototop:hover {
+            background-color: #555;
+        }
+
     </style>
     <script>
 
@@ -13,21 +36,70 @@
 
         function showphoto(x) {
             let i;
-            for (i = 1; i > 0 ; i++) {
-                if (i <= x) {
-                    document.getElementById("photo" + i).style.display = "block";
-                } else if (i >= x + 1) {
-                    document.getElementById("photo" + i).style.display = "none";
+            document.getElementById("showmore").style.display = "block";
+            document.getElementById("mixphotomessage").style.display = "none";
+            document.getElementById("showmore").onclick = function() {showmore(x)};
+            for (i = 1; i > 0; i++) {
+                var id = document.getElementById("photo" + i);
+                if (id != null) {
+                    if (i <= x) {
+                        id.style.display = "block";
+                    } else if (i >= x + 1) {
+                        id.style.display = "none";
+                    }
+                } else {
+                    break;
                 }
             }
         }
 
         function showallphoto() {
             let i = 1;
+            document.getElementById("showmore").style.display = "none";
             while (i > 0) {
+                var id = document.getElementById("photo" + i);
                 i += 1;
-                document.getElementById("photo" + i).style.display = "block";
+                if (id != null) {
+                    id.style.display = "block";
+                } else {
+                    break;
+                }
             }
+        }
+
+        /*end*/
+
+        /* this is show more function*/
+        //If you set in the above function to display "x" photos then you can show "x" more photos by this function.//
+
+        function showmore(x) {
+            var i;
+            var photo = [];
+            for (i = 1; photo.length < x; i++) {
+                var id = document.getElementById("photo" + i);
+                if (id != null) {
+                    if (id.style.display === "block") {
+                        continue;
+                    } else if (id.style.display === "none") {
+                        photo.push(i);
+                        id.style.display = "block";
+                    }
+                } else {
+                    document.getElementById("showmore").style.display = "none";
+                    document.getElementById("mixphotomessage").style.display = "block";
+                    break;
+                }
+            }
+            document.getElementById("photo" + photo[0]).scrollIntoView();
+        }
+
+        /*end*/
+
+        /* this is go to top function */
+
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
         }
 
         /*end*/
@@ -40,6 +112,10 @@
         <h1> Images</h1>
         <br>
     </div>
+
+    <!--This is th latest gototop button and function-->
+
+    <button onclick="topFunction()" id="gototop" title="Go to top">Top</button>
 
     <!--This is the latest button and onclick function-->
 
@@ -59,7 +135,8 @@
             <div class="col-md-12" style="height:350px">
                 {% for photo in photos %}
 
-                    <div id="photo{{ loop.index }}" class="col-md-3" style="display:block;">  <!-- added new id and style in this div -->
+                    <div id="photo{{ loop.index }}" class="col-md-3" style="display:block;">
+                        <!-- added new id and style in this div -->
 
                         <img src="{{ photo_dict[photo]['gcs_public_url'] }}"
                              style="display:block; margin-right: auto;margin-left: auto" height="300px" width="300px">
@@ -79,6 +156,9 @@
                         <hr>
                     </div>
                 {% endfor %}
+                <button id="showmore" style="position: absolute; left: 50%; display: none;">More</button>
+                <p id="mixphotomessage" style="text-align: center; display: none;">There are no more photos!</p>
+                <br><br>
             </div>
         </div>
     {% endif %}
