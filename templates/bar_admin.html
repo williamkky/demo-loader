@@ -1,6 +1,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
     <style>
         #loading {
             position: fixed;
@@ -50,33 +51,68 @@
             }
         }
 
-        #click {
-            display: block;
+        .navbar-nav {
+            flex-flow: row wrap;
         }
+
+        .navbar-nav a:hover {
+            background-color: #1b1e21;
+            opacity: 80%;
+            border-radius: 7px;
+            color: #ffffff;
+        }
+
     </style>
+
     <script>
-        document.getElementById("click").addEventListener("click", loading);
 
         function loading() {
             document.getElementById("loading").style.display = "block";
         }
     </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
 </head>
 <body>
-<nav class="navbar bg-dark">
-
-    <div class="position-relative container-fluid">
-        <a id="click" class="btn btn-outline-light" role="button" href="/get_data" onclick="loading();">loader</a>
-    </div>
-    <div class="position-relative container-fluid">
-        <a id="click" class="btn btn-outline-light" role="button" href="/new_loader" onclick="loading();">new loader</a>
-    </div>
-    <div class="position-relative container-fluid">
-        <a id="click" class="btn btn-outline-light" role="button" href="/show_photo" onclick="loading();">show photos</a>
-    </div>
-    <div id="loading">
-        <div id="circle"></div>
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+    <a class="navbar-brand" href="/">
+        <img src="{{ url_for('static', filename='MF_white_logo.png') }}" width="128.6" height="30.6"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-link ml-2 mr-2" href="/" onclick="loading();">&nbsp;Home&nbsp;</a>
+            <a class="nav-link ml-2 mr-2" href="/get_data" onclick="loading();">&nbsp;Loader Demo&nbsp;</a>
+            <a class="nav-link ml-2 mr-2" href="/new_loader" onclick="loading();">&nbsp;New Loader Demo&nbsp;</a>
+            <a class="nav-link ml-2 mr-2" href="/show_photo" onclick="loading();">&nbsp;Photos List&nbsp;</a>
+            <a class="nav-link ml-2 mr-2" href="/" onclick="loading();">&nbsp;Microfusion
+                Product Lens&nbsp;</a>
+            <a class="nav-link ml-2 mr-2" href="/" onclick="loading();">&nbsp;Microfusion
+                Product Lens&nbsp;</a>
+            <a class="nav-link ml-2 mr-2" href="/" onclick="loading();">&nbsp;Microfusion
+                Product Lens&nbsp;</a>
+            <a class="nav-link ml-2 mr-2" href="/" onclick="loading();">&nbsp;Microfusion
+                Product Lens&nbsp;</a>
+        </div>
+        <button class="btn btn-outline-danger ml-auto">Logout</button>
     </div>
 </nav>
+<div>
+    <h1>Welcome to My Demo Page</h1>
+</div>
+<div id="loading">
+    <div id="circle"></div>
+</div>
+
 <br>
 </body>
